@@ -1,9 +1,10 @@
 import AllTasks from "./all-tasks";
+import SidePanel from "./side-panel";
 
 export default function HomePage() {
   return (
     <div className="h-full flex p-10 gap-4">
-      <div className="p-10 bg-card rounded-xl w-[300px]">Side Panel</div>
+      <SidePanel />
       <AllTasks />
     </div>
   );
