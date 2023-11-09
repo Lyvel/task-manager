@@ -11,19 +11,19 @@ export default function SidePanelNavigation() {
         current
         title={"All Tasks"}
         icon={<Home />}
-        onClick={() => router.push("/")}
+        onClick={() => router.push("/?tasks=all")}
       />
       <SidePanelButton
         current={false}
         title={"Important"}
         icon={<List />}
-        onClick={() => router.push("/")}
+        onClick={() => router.push("/?tasks=important")}
       />
       <SidePanelButton
         current={false}
         title={"Completed"}
         icon={<Check />}
-        onClick={() => router.push("/")}
+        onClick={() => router.push("/?tasks=completed")}
       />
     </div>
   );

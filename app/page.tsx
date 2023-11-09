@@ -4,10 +4,14 @@ import { ModeToggle } from "@/components/theme-toggle";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const session = await getServerSession(authOptions);
   if (session) {
-    return <HomePage />;
+    return <HomePage searchParams={searchParams} />;
   }
   return (
     <main>
