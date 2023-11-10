@@ -30,6 +30,33 @@ export default function TaskCard({ task }: { task: Task }) {
       });
     }
   }
+  async function completeTask() {
+    const response = await fetch("/api/task/update", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: task.id,
+        title: task.title,
+        description: task.description,
+        important: task.important,
+        completed: !task.completed,
+        completeBy: new Date(task.completeBy),
+      }),
+    });
+    if (response.ok) {
+      toast({
+        title: "Task Completed Successfully",
+        description: task.title + " has been completed successfully",
+      });
+      router.refresh();
+    } else {
+      toast({
+        title: "Failed to complete task",
+        description: task.title + " has failed to be complete",
+        variant: "destructive",
+      });
+    }
+  }
   return (
     <>
       <div
@@ -47,7 +74,12 @@ export default function TaskCard({ task }: { task: Task }) {
             {new Date(task.completeBy).toLocaleDateString()}
           </time>
           <div className="flex justify-between">
-            <Button variant={"destructive"}>Incomplete</Button>
+            <Button
+              variant={task.completed ? "default" : "destructive"}
+              onClick={() => completeTask()}
+            >
+              {task.completed ? "Completed" : "Incomplete"}
+            </Button>
             <div className="flex gap-2">
               <Button
                 variant={"ghost"}
