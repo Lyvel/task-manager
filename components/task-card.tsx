@@ -3,9 +3,33 @@ import { Delete, DeleteIcon, FileEdit, Trash } from "lucide-react";
 import { Button } from "./ui/button";
 import TaskEdit from "./task-edit";
 import { useState } from "react";
+import { useToast } from "./ui/use-toast";
+import { useRouter } from "next/navigation";
 
 export default function TaskCard({ task }: { task: Task }) {
   const [showEdit, setShowEdit] = useState(false);
+
+  const { toast } = useToast();
+  const router = useRouter();
+  async function deleteTask() {
+    const response = await fetch("/api/task/delete/" + task.id, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+    if (response.ok) {
+      toast({
+        title: "Task Deleted Successfully",
+        description: task.title + " has been deleted successfully",
+      });
+      router.refresh();
+    } else {
+      toast({
+        title: "Failed to delete task",
+        description: task.title + " has failed to be deleted",
+        variant: "destructive",
+      });
+    }
+  }
   return (
     <>
       <div
@@ -37,6 +61,7 @@ export default function TaskCard({ task }: { task: Task }) {
                 variant={"ghost"}
                 size={"icon"}
                 className="hover:text-destructive"
+                onClick={() => deleteTask()}
               >
                 <Trash />
               </Button>
