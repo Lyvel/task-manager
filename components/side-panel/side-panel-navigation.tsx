@@ -7,7 +7,6 @@ export default function SidePanelNavigation() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const tasks = searchParams.get("tasks");
-  console.log(tasks);
   return (
     <div className="flex flex-col w-full">
       <SidePanelButton

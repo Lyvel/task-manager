@@ -4,6 +4,8 @@ import { Button } from "./ui/button";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import TaskNew from "./task-new";
+import { sp } from "@/app/page";
+import { Fragment } from "react";
 
 async function getTasks(email: string) {
   const response = await fetch("http://localhost:3000/api/task/" + email, {
@@ -20,6 +22,8 @@ export default async function AllTasks({ category }: { category: string }) {
   var loading = true;
   const session = await getServerSession(authOptions);
   const tasks = await getTasks(session?.user?.email);
+
+  console.log(sp);
 
   if (tasks) {
     loading = false;
@@ -39,7 +43,16 @@ export default async function AllTasks({ category }: { category: string }) {
         ) : (
           <>
             {tasks.tasks.map((task: Task) => (
-              <TaskCard key={task.id} task={task} />
+              <Fragment key={task.id}>
+                {sp.tasks === undefined && <TaskCard task={task} />}
+                {sp.tasks === "all" && <TaskCard task={task} />}
+                {sp.tasks === "important" && task.important && (
+                  <TaskCard task={task} />
+                )}
+                {sp.tasks === "completed" && task.completed && (
+                  <TaskCard task={task} />
+                )}
+              </Fragment>
             ))}
           </>
         )}
