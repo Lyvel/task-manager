@@ -1,5 +1,5 @@
 type Task = {
-  completeBy: Date;
+  completeBy: string;
   completed: boolean;
   createdAt: Date;
   description: string;

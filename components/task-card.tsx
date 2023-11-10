@@ -5,6 +5,17 @@ import TaskEdit from "./task-edit";
 import { useState } from "react";
 import { useToast } from "./ui/use-toast";
 import { useRouter } from "next/navigation";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "./ui/alert-dialog";
 
 export default function TaskCard({ task }: { task: Task }) {
   const [showEdit, setShowEdit] = useState(false);
@@ -71,7 +82,8 @@ export default function TaskCard({ task }: { task: Task }) {
         </div>
         <div className="flex flex-col gap-2">
           <time className="">
-            {new Date(task.completeBy).toLocaleDateString()}
+            {/* {new Date(task.completeBy).toLocaleDateString()} */}
+            {task.completeBy.split("T")[0]}
           </time>
           <div className="flex justify-between">
             <Button
@@ -89,14 +101,34 @@ export default function TaskCard({ task }: { task: Task }) {
               >
                 <FileEdit />
               </Button>
-              <Button
-                variant={"ghost"}
-                size={"icon"}
-                className="hover:text-destructive"
-                onClick={() => deleteTask()}
-              >
-                <Trash />
-              </Button>
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button
+                    variant={"ghost"}
+                    size={"icon"}
+                    className="hover:text-destructive"
+                  >
+                    <Trash />
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>
+                      Are you absolutely sure?
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This action cannot be undone. This will permanently delete
+                      this task.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction onClick={() => deleteTask()}>
+                      Continue
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             </div>
           </div>
         </div>
