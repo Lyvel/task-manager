@@ -46,6 +46,7 @@ export default function AllTasks({ sp }: { sp: SP }) {
                   <>
                     {sp.tasks === undefined && <TaskCard task={task} />}
                     {sp.tasks === "all" && <TaskCard task={task} />}
+                    {sp.tasks === "all-cat" && <TaskCard task={task} />}
                     {sp.tasks === "important" && task.important && (
                       <TaskCard task={task} />
                     )}
