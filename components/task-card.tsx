@@ -72,7 +72,7 @@ export default function TaskCard({ task }: { task: Task }) {
     <>
       <div
         className={
-          "p-5 bg-muted rounded-xl shadow-inner flex flex-col gap-4 m-1 " +
+          "p-5 bg-muted rounded-xl flex flex-col justify-between gap-4 m-1 shadow-2xl " +
           (task.important && "outline-dotted outline-primary")
         }
       >
@@ -82,8 +82,8 @@ export default function TaskCard({ task }: { task: Task }) {
         </div>
         <div className="flex flex-col gap-2">
           <time className="">
-            {/* {new Date(task.completeBy).toLocaleDateString()} */}
-            {task.completeBy.split("T")[0]}
+            {new Date(task.completeBy).toLocaleDateString()}
+            {/* {task.completeBy.split("T")[0]} */}
           </time>
           <div className="flex justify-between">
             <Button

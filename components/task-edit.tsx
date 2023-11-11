@@ -120,11 +120,11 @@ export default function TaskEdit({
 
   return (
     <div
-      className="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex"
+      className="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-80 flex backdrop-blur"
       onClick={() => show(false)}
     >
       <div
-        className="flex flex-col w-1/3 bg-card m-auto p-4 rounded-lg"
+        className="flex flex-col xl:w-1/3 md:w-1/2 md:mx-auto w-full mx-10 bg-card m-auto p-4 rounded-lg outline outline-1 outline-card-foreground"
         onClick={(e) => e.stopPropagation()}
       >
         <h1 className="text-xl">{newTask ? "Create" : "Update"} a Task</h1>

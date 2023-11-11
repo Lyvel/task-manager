@@ -8,21 +8,21 @@ export async function GET(
   req: NextApiRequest,
   context: { params: { id: string } }
 ) {
-  // const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
   try {
     const id = context.params.id;
 
-    // console.log(session + ":::" + id);
+    console.log(session + ":::" + id);
 
-    // if (session?.user?.email !== id) {
-    //   return NextResponse.json(
-    //     {
-    //       message: "You don't have permission to access these.",
-    //       error: "ERROR",
-    //     },
-    //     { status: 500 }
-    //   );
-    // }
+    if (session?.user?.email !== id) {
+      return NextResponse.json(
+        {
+          message: "You don't have permission to access these.",
+          error: "ERROR",
+        },
+        { status: 500 }
+      );
+    }
 
     const tasks = await db.tasks.findMany({
       where: {

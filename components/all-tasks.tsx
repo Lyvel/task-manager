@@ -1,14 +1,13 @@
+"use client";
 import { Plus } from "lucide-react";
 import TaskCard from "./task-card";
 import { Button } from "./ui/button";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
 import TaskNew from "./task-new";
-import { sp } from "@/app/page";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { session } from "./session";
 
 async function getTasks(email: string) {
-  const response = await fetch("http://localhost:3000/api/task/" + email, {
+  const response = await fetch("/api/task/" + email, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });
@@ -18,19 +17,20 @@ async function getTasks(email: string) {
   }
 }
 
-export default async function AllTasks() {
-  var loading = true;
-  const session = await getServerSession(authOptions);
-  const tasks = await getTasks(session?.user?.email);
-
-  console.log(sp);
-
-  if (tasks) {
-    loading = false;
-  }
+export default function AllTasks({ sp }: { sp: SP }) {
+  const [tasks, setTasks] = useState<Tasks>();
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchTasks = async () => {
+      const tasks = await getTasks(session.serverSession.user.email);
+      setTasks(tasks);
+      setLoading(false);
+    };
+    fetchTasks().catch(console.error);
+  }, []);
 
   return (
-    <div className="p-5 bg-card rounded-xl w-full gap-4 flex flex-col ">
+    <div className="p-5 bg-card rounded-xl w-full gap-4 flex flex-col outline outline-1 outline-card-foreground">
       <div className="flex justify-between">
         <h1 className="font-bold tracking-wider text-3xl">All Tasks</h1>
         <Button variant={"ghost"} size={"icon"}>
@@ -38,18 +38,22 @@ export default async function AllTasks() {
         </Button>
       </div>
       <div className="grid 2xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 overflow-y-auto">
-        {loading ? (
-          <>Loading...</>
-        ) : (
+        {!loading && (
           <>
-            {tasks.tasks.map((task: Task) => (
+            {tasks?.tasks.map((task: Task) => (
               <Fragment key={task.id}>
-                {sp.tasks === undefined && <TaskCard task={task} />}
-                {sp.tasks === "all" && <TaskCard task={task} />}
-                {sp.tasks === "important" && task.important && (
-                  <TaskCard task={task} />
-                )}
-                {sp.tasks === "completed" && task.completed && (
+                {sp !== undefined ? (
+                  <>
+                    {sp.tasks === undefined && <TaskCard task={task} />}
+                    {sp.tasks === "all" && <TaskCard task={task} />}
+                    {sp.tasks === "important" && task.important && (
+                      <TaskCard task={task} />
+                    )}
+                    {sp.tasks === "completed" && task.completed && (
+                      <TaskCard task={task} />
+                    )}
+                  </>
+                ) : (
                   <TaskCard task={task} />
                 )}
               </Fragment>

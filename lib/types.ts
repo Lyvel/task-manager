@@ -19,3 +19,19 @@ type Session = {
     };
   };
 };
+
+type ServerSession = {
+  user: {
+    email: string;
+    name: string;
+    image: string;
+  };
+};
+
+type Tasks = {
+  tasks: Task[];
+};
+
+type SP = {
+  tasks: string;
+};
