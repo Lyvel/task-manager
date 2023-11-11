@@ -18,7 +18,7 @@ async function getTasks(email: string) {
   }
 }
 
-export default async function AllTasks({ category }: { category: string }) {
+export default async function AllTasks() {
   var loading = true;
   const session = await getServerSession(authOptions);
   const tasks = await getTasks(session?.user?.email);
@@ -37,7 +37,7 @@ export default async function AllTasks({ category }: { category: string }) {
           <Plus />
         </Button>
       </div>
-      <div className="grid grid-cols-4 gap-4 overflow-y-auto">
+      <div className="grid 2xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 overflow-y-auto">
         {loading ? (
           <>Loading...</>
         ) : (

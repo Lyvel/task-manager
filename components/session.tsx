@@ -1,5 +1,4 @@
 "use client";
-import { Session } from "next-auth";
 
 export var session = {} as Session;
 
