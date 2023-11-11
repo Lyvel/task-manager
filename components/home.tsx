@@ -10,9 +10,9 @@ export default async function HomePage() {
 
   return (
     <div className="h-screen flex p-4 lg:p-10 gap-4">
+      <SessionProv serverSession={session as ServerSession} />
       <SidePanel />
       <AllTasks sp={sp} />
-      <SessionProv serverSession={session as ServerSession} />
     </div>
   );
 }

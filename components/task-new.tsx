@@ -9,10 +9,10 @@ export default function TaskNew() {
   return (
     <>
       <div
-        className="p-5 bg-muted rounded-xl shadow-inner flex flex-col gap-4 cursor-pointer min-h-[188px] hover:bg-popover"
+        className="p-5 bg-muted rounded-xl flex flex-col gap-4 cursor-pointer min-h-[188px] hover:bg-popover shadow-lg"
         onClick={() => setShowEdit(true)}
       >
-        <div className="outline-dashed w-full h-full flex justify-center items-center flex-col gap-4">
+        <div className="outline-dashed w-full h-full flex justify-center items-center flex-col gap-4 rounded-xl">
           <h1 className="font-bold text-xl">Add new Task</h1>
           <Plus />
         </div>

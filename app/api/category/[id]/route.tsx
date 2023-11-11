@@ -22,19 +22,16 @@ export async function GET(
       );
     }
 
-    const tasks = await db.tasks.findMany({
+    const categories = await db.categories.findMany({
       where: {
         email: {
           equals: id,
         },
       },
-      orderBy: {
-        completeBy: "asc",
-      },
     });
 
     return NextResponse.json({
-      tasks: tasks,
+      categories: categories,
     });
   } catch (error) {
     console.log(error);

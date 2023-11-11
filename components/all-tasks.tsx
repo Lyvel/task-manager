@@ -4,7 +4,7 @@ import TaskCard from "./task-card";
 import { Button } from "./ui/button";
 import TaskNew from "./task-new";
 import { Fragment, useEffect, useState } from "react";
-import { session } from "./session";
+import { refresh, session } from "./session";
 
 async function getTasks(email: string) {
   const response = await fetch("/api/task/" + email, {
@@ -27,12 +27,18 @@ export default function AllTasks({ sp }: { sp: SP }) {
       setLoading(false);
     };
     fetchTasks().catch(console.error);
-  }, []);
+  }, [refresh]);
 
   return (
     <div className="p-5 bg-card rounded-xl w-full gap-4 flex flex-col outline outline-1 outline-card-foreground">
       <div className="flex justify-between">
-        <h1 className="font-bold tracking-wider text-3xl">All Tasks</h1>
+        <h1 className="font-bold tracking-wider text-3xl uppercase">
+          {sp.tasks !== "all-cat"
+            ? sp.tasks !== undefined
+              ? sp.tasks + " Tasks"
+              : "All Tasks"
+            : sp.categoryName + " Tasks"}
+        </h1>
         <Button variant={"ghost"} size={"icon"}>
           <Plus />
         </Button>
@@ -46,7 +52,10 @@ export default function AllTasks({ sp }: { sp: SP }) {
                   <>
                     {sp.tasks === undefined && <TaskCard task={task} />}
                     {sp.tasks === "all" && <TaskCard task={task} />}
-                    {sp.tasks === "all-cat" && <TaskCard task={task} />}
+                    {sp.tasks === "all-cat" &&
+                      task.category.toString() === sp.category && (
+                        <TaskCard task={task} />
+                      )}
                     {sp.tasks === "important" && task.important && (
                       <TaskCard task={task} />
                     )}

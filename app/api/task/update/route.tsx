@@ -3,11 +3,19 @@ import { db } from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
-export async function PUT(req) {
+export async function PUT(req: Request) {
   const session = await getServerSession(authOptions);
   try {
     const body = await req.json();
-    const { id, title, description, important, completed, completeBy } = body;
+    const {
+      id,
+      title,
+      description,
+      important,
+      completed,
+      completeBy,
+      category,
+    } = body;
 
     const ownerOfTask = await db.tasks.findUnique({
       where: { id: id },
@@ -24,7 +32,7 @@ export async function PUT(req) {
       where: {
         id: id,
       },
-      data: { title, description, important, completed, completeBy },
+      data: { title, description, important, completed, completeBy, category },
     });
     return NextResponse.json({
       message: "Task Updated successfully",

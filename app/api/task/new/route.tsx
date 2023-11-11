@@ -4,10 +4,25 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { email, title, description, important, completed, completeBy } =
-      body;
+    const {
+      email,
+      title,
+      description,
+      important,
+      completed,
+      completeBy,
+      category,
+    } = body;
     const nextTask = await db.tasks.create({
-      data: { email, title, description, important, completed, completeBy },
+      data: {
+        email,
+        title,
+        description,
+        important,
+        completed,
+        completeBy,
+        category,
+      },
     });
     return NextResponse.json({
       message: "Task Added successfully",

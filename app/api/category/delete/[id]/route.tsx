@@ -4,7 +4,7 @@ import { NextApiRequest } from "next";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
-export async function GET(
+export async function DELETE(
   req: NextApiRequest,
   context: { params: { id: string } }
 ) {
@@ -12,29 +12,26 @@ export async function GET(
   try {
     const id = context.params.id;
 
-    if (session?.user?.email !== id) {
+    const category = await db.categories.findUnique({
+      where: { id: parseInt(id) },
+    });
+
+    if (session?.user?.email !== category.email) {
       return NextResponse.json(
         {
-          message: "You don't have permission to access these.",
+          message: "You don't have permission to delete these.",
           error: "ERROR",
         },
         { status: 500 }
       );
     }
 
-    const tasks = await db.tasks.findMany({
-      where: {
-        email: {
-          equals: id,
-        },
-      },
-      orderBy: {
-        completeBy: "asc",
-      },
+    await db.categories.delete({
+      where: { id: parseInt(id) },
     });
 
     return NextResponse.json({
-      tasks: tasks,
+      message: "Deleted successfully",
     });
   } catch (error) {
     console.log(error);

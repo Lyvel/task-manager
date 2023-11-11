@@ -5,14 +5,15 @@ import { Checkbox } from "./ui/checkbox";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
-import { FormEvent, useState } from "react";
-import { session } from "./session";
+import { FormEvent, useEffect, useState } from "react";
+import { refresh, session, setRefresh } from "./session";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -24,6 +25,15 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { useToast } from "./ui/use-toast";
 import { useRouter } from "next/navigation";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
+import Link from "next/link";
+import { getCategories } from "./side-panel/side-panel-navigation";
 
 const formSchema = z.object({
   title: z
@@ -36,6 +46,7 @@ const formSchema = z.object({
   important: z.boolean(),
   completed: z.boolean(),
   completeBy: z.date().min(new Date(Date.now())),
+  category: z.string(),
 });
 
 export default function TaskEdit({
@@ -47,6 +58,16 @@ export default function TaskEdit({
   newTask: boolean | undefined;
   task: Task | undefined;
 }) {
+  const [categories, setCategories] = useState<Tasks>();
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const tasks = await getCategories(session.serverSession.user.email);
+      setCategories(tasks);
+      setLoading(false);
+    };
+    fetchCategories().catch(console.error);
+  }, []);
   const { toast } = useToast();
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -57,10 +78,12 @@ export default function TaskEdit({
       important: task ? task.important : false,
       completed: task ? task.completed : false,
       completeBy: task ? new Date(task.completeBy) : new Date(Date.now()),
+      category: task ? task.category.toString() : "0",
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(parseInt(values.category));
     if (newTask) {
       const response = await fetch("/api/task/new", {
         method: "POST",
@@ -72,6 +95,7 @@ export default function TaskEdit({
           important: values.important,
           completed: values.completed,
           completeBy: new Date(values.completeBy),
+          category: parseInt(values.category),
         }),
       });
       if (response.ok) {
@@ -80,6 +104,7 @@ export default function TaskEdit({
           description: values.title + " has been added successfully",
         });
         show(false);
+        setRefresh(!refresh);
         router.refresh();
       } else {
         toast({
@@ -99,6 +124,7 @@ export default function TaskEdit({
           important: values.important,
           completed: values.completed,
           completeBy: new Date(values.completeBy),
+          category: parseInt(values.category),
         }),
       });
       if (response.ok) {
@@ -107,6 +133,7 @@ export default function TaskEdit({
           description: values.title + " has been updated successfully",
         });
         show(false);
+        setRefresh(!refresh);
         router.refresh();
       } else {
         toast({
@@ -228,6 +255,37 @@ export default function TaskEdit({
                       onCheckedChange={field.onChange}
                     />
                   </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="category"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Category</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value.toString()}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a verified email to display" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {!loading &&
+                        categories?.categories.map((category) => (
+                          <SelectItem
+                            value={category.id.toString()}
+                            key={category.id}
+                          >
+                            {category.title}
+                          </SelectItem>
+                        ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
                 </FormItem>
               )}
             />

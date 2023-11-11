@@ -1,5 +1,5 @@
 "use client";
-import { Delete, DeleteIcon, FileEdit, Trash } from "lucide-react";
+import { Banana, Delete, DeleteIcon, FileEdit, Trash } from "lucide-react";
 import { Button } from "./ui/button";
 import TaskEdit from "./task-edit";
 import { useState } from "react";
@@ -16,6 +16,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "./ui/alert-dialog";
+import { refresh, setRefresh } from "./session";
 
 export default function TaskCard({ task }: { task: Task }) {
   const [showEdit, setShowEdit] = useState(false);
@@ -60,6 +61,7 @@ export default function TaskCard({ task }: { task: Task }) {
         description: task.title + " has been completed successfully",
       });
       router.refresh();
+      setRefresh(!refresh);
     } else {
       toast({
         title: "Failed to complete task",
@@ -72,12 +74,15 @@ export default function TaskCard({ task }: { task: Task }) {
     <>
       <div
         className={
-          "p-5 bg-muted rounded-xl flex flex-col justify-between gap-4 m-1 shadow-2xl " +
-          (task.important && "outline-dotted outline-primary")
+          "p-5 bg-muted rounded-xl flex flex-col justify-between gap-4 m-1 shadow-lg " +
+          (task.important && "")
         }
       >
         <div className="flex flex-col gap-2">
-          <h1 className="text-xl font-bold tracking-wider">{task.title}</h1>
+          <h1 className="text-xl font-bold tracking-wider flex justify-between">
+            {task.title}
+            {task.important && <Banana className="text-yellow-500" />}
+          </h1>
           <p className="line-clamp-3 text-ellipsis">{task.description}</p>
         </div>
         <div className="flex flex-col gap-2">

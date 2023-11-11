@@ -1,6 +1,7 @@
 type Task = {
   completeBy: string;
   completed: boolean;
+  category: number;
   createdAt: Date;
   description: string;
   email: string;
@@ -34,4 +35,19 @@ type Tasks = {
 
 type SP = {
   tasks: string;
+  category: string;
+  categoryName: string;
+};
+
+type Category = {
+  id: number;
+  email: string;
+  title: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+type Categories = {
+  categories: Category[];
 };

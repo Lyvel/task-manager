@@ -1,11 +1,8 @@
 "use client";
-import { ArrowBigRight, Check, Home, List, LogOut, Menu } from "lucide-react";
-import SidePanelButton from "./side-panel-button";
 import SidePanelProfile from "./side-panel-profile";
 import SidePanelNavigation from "./side-panel-navigation";
 import SidePanelSignout from "./side-panel-signout";
 import { useRef, useState } from "react";
-import { Button } from "../ui/button";
 import { Squash as Hamburger } from "hamburger-react";
 import { useClickAway } from "react-use";
 import { motion } from "framer-motion";
