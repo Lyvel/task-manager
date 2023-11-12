@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Task Manager Web App
+
+## Introduction
+
+This web application is a task manager that allows users to log in, create tasks, and organize them efficiently. Built with Next.js, it features a user-friendly interface and robust functionality to enhance productivity.
+
+[Live Demo]() - Not Available at the moment
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Before you begin, ensure you have the following installed:
+
+- Node.js
+- npm (Node Package Manager)
+- PostgreSQL Database (e.g., Supabase)
+
+### Setting Up the Database
+
+1. **Create a PostgreSQL Database**: Use a service like Supabase to set up your PostgreSQL database.
+2. **Gather Database Credentials**: Make sure to note down the database URL as you will need it for the `.env` file.
+
+### Environment Variables
+
+You need to create a `.env` file in the root directory of the project and fill in the following environment variables:
+
+```
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+AUTH_SECRET=your_auth_secret
+NEXTAUTH_URL=your_nextauth_url
+DATABASE_URL=your_database_url
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Replace `your_google_client_id`, `your_google_client_secret`, `your_auth_secret`, `your_nextauth_url`, and `your_database_url` with your actual credentials.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Running the Application
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. **Install Dependencies**: Run `npm install` to install the required packages.
+2. **Start the Development Server**: Execute `npm run dev` to start the development server. The app will be running at `http://localhost:3000`.
 
-## Learn More
+## Features
 
-To learn more about Next.js, take a look at the following resources:
+- **User Authentication**: Secure login functionality.
+- **Task Management**: Create, edit, and organize tasks.
+- **Database Integration**: Tasks are stored in a PostgreSQL database for persistence.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Contributions to improve the application are welcome. Please follow these steps to contribute:
 
-## Deploy on Vercel
+1. Fork the repository.
+2. Create a new branch for your feature.
+3. Commit your changes.
+4. Push to the branch.
+5. Open a pull request.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[MIT](https://choosealicense.com/licenses/mit/)
+
+## Contact
+
+Dawid Mleczko - [Email](dawid@lyvel.co.uk)
+
+[Project Link](https://github.com/Lyvel/task-manager)
