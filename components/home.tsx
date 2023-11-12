@@ -30,9 +30,10 @@ export default async function HomePage({ searchParams }: { searchParams: SP }) {
         serverSession={session as ServerSession}
         serverCategories={categories as Categories}
         serverTasks={tasks as Tasks}
+        serverSearchParams={searchParams}
       />
       <SidePanel />
-      <AllTasks sp={searchParams} />
+      <AllTasks />
     </div>
   );
 }

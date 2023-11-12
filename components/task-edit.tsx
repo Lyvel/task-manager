@@ -4,7 +4,13 @@ import { Button } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
-import { categories, refresh, session, setRefresh } from "./session";
+import {
+  categories,
+  refresh,
+  searchParams,
+  session,
+  setRefresh,
+} from "./session";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -63,7 +69,7 @@ export default function TaskEdit({
       important: task ? task.important : false,
       completed: task ? task.completed : false,
       completeBy: task ? new Date(task.completeBy) : new Date(Date.now()),
-      category: task ? task.category.toString() : "0",
+      category: task ? task.category.toString() : searchParams.category,
     },
   });
 

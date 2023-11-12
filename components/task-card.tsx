@@ -23,7 +23,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "./ui/alert-dialog";
-import { refresh, setRefresh } from "./session";
+import { categories, refresh, setRefresh } from "./session";
 import {
   Tooltip,
   TooltipContent,
@@ -86,10 +86,12 @@ export default function TaskCard({ task }: { task: Task }) {
   return (
     <>
       <div
-        className={
-          "p-5 bg-muted rounded-xl flex flex-col justify-between gap-4 m-1 shadow-lg 2xl:max-w-xs w-full " +
-          (task.important && "")
-        }
+        className={`p-5 bg-muted rounded-xl flex flex-col justify-between gap-4 m-1 shadow-lg 2xl:max-w-xs w-full ${
+          task.category !== 0 && ` outline outline-2`
+        } `}
+        style={{
+          outlineColor: categories.find((c) => c.id === task.category)?.colour,
+        }}
       >
         <div className="flex flex-col gap-2">
           <div className="flex justify-between">

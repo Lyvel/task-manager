@@ -80,14 +80,9 @@ export default function SidePanelNavigation() {
                   key={cat.id}
                   current={category === cat.id.toString()}
                   title={cat.title}
-                  icon={<Folder />}
+                  icon={<Folder color={cat.colour} />}
                   onClick={() =>
-                    router.push(
-                      "/?tasks=all-cat&category=" +
-                        cat.id +
-                        "&categoryName=" +
-                        cat.title
-                    )
+                    router.push("/?tasks=all-cat&category=" + cat.id)
                   }
                   className={"translate-x-5"}
                   category={cat}

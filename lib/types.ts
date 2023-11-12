@@ -42,6 +42,7 @@ type Category = {
   email: string;
   title: string;
   description: string;
+  colour: string;
   createdAt: Date;
   updatedAt: Date;
 };
