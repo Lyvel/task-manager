@@ -1,13 +1,9 @@
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { NextApiRequest } from "next";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
-export async function GET(
-  req: NextApiRequest,
-  context: { params: { id: string } }
-) {
+export async function GET(req: Request, context: { params: { id: string } }) {
   const session = await getServerSession(authOptions);
   try {
     const id = context.params.id;
