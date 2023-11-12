@@ -8,17 +8,18 @@ import { db } from "@/lib/db";
 export default async function HomePage({ searchParams }: { searchParams: SP }) {
   const session = await getServerSession(authOptions);
 
+  const email = session?.user?.email || "";
   const categories = await db.categories.findMany({
     where: {
       email: {
-        equals: session?.user?.email,
+        equals: email,
       },
     },
   });
   const tasks = await db.tasks.findMany({
     where: {
       email: {
-        equals: session?.user?.email,
+        equals: email,
       },
     },
   });

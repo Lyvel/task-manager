@@ -1,5 +1,5 @@
 type Task = {
-  completeBy: string;
+  completeBy: Date;
   completed: boolean;
   category: number;
   createdAt: Date;
@@ -42,8 +42,8 @@ type Category = {
   email: string;
   title: string;
   description: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 type Categories = Category[];
