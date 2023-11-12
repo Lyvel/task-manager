@@ -3,10 +3,9 @@ import AllTasks from "./all-tasks";
 import SessionProv from "./session";
 import SidePanel from "./side-panel/side-panel";
 import { authOptions } from "@/lib/auth";
-import { sp } from "@/app/page";
 import { db } from "@/lib/db";
 
-export default async function HomePage() {
+export default async function HomePage({ searchParams }: { searchParams: SP }) {
   const session = await getServerSession(authOptions);
 
   const categories = await db.categories.findMany({
@@ -32,7 +31,7 @@ export default async function HomePage() {
         serverTasks={tasks as Tasks}
       />
       <SidePanel />
-      <AllTasks sp={sp} />
+      <AllTasks sp={searchParams} />
     </div>
   );
 }
