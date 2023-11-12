@@ -27,7 +27,7 @@ export default function AllTasks({ sp }: { sp: SP }) {
         </Button>
       </div>
       {/* className="grid 2xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 overflow-y-auto" */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:flex gap-4 overflow-hidden overflow-y-auto xl:flex-wrap">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 2xl:flex gap-4 overflow-hidden overflow-y-auto 2xl:flex-wrap">
         {true && (
           <>
             {tasks.map((task: Task) => (
@@ -49,6 +49,9 @@ export default function AllTasks({ sp }: { sp: SP }) {
                     {sp.tasks === "incomplete" && !task.completed && (
                       <TaskCard task={task} />
                     )}
+                    {sp.tasks === "overdue" &&
+                      new Date(task.completeBy) < new Date(Date.now()) &&
+                      !task.completed && <TaskCard task={task} />}
                   </>
                 ) : (
                   <TaskCard task={task} />

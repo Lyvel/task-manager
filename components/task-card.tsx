@@ -1,5 +1,12 @@
 "use client";
-import { Banana, Delete, DeleteIcon, FileEdit, Trash } from "lucide-react";
+import {
+  AlertCircle,
+  Banana,
+  Delete,
+  DeleteIcon,
+  FileEdit,
+  Trash,
+} from "lucide-react";
 import { Button } from "./ui/button";
 import TaskEdit from "./task-edit";
 import { useState } from "react";
@@ -17,6 +24,12 @@ import {
   AlertDialogTrigger,
 } from "./ui/alert-dialog";
 import { refresh, setRefresh } from "./session";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 export default function TaskCard({ task }: { task: Task }) {
   const [showEdit, setShowEdit] = useState(false);
@@ -74,15 +87,43 @@ export default function TaskCard({ task }: { task: Task }) {
     <>
       <div
         className={
-          "p-5 bg-muted rounded-xl flex flex-col justify-between gap-4 m-1 shadow-lg xl:max-w-xs w-full " +
+          "p-5 bg-muted rounded-xl flex flex-col justify-between gap-4 m-1 shadow-lg 2xl:max-w-xs w-full " +
           (task.important && "")
         }
       >
         <div className="flex flex-col gap-2">
-          <h1 className="text-xl font-bold tracking-wider flex justify-between">
-            {task.title}
-            {task.important && <Banana className="text-yellow-500" />}
-          </h1>
+          <div className="flex justify-between">
+            <h1 className="text-xl font-bold tracking-wider  overflow-hidden text-ellipsis whitespace-nowrap">
+              {task.title}
+            </h1>
+            <div className="flex gap-2">
+              {task.important && (
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <Banana className="text-yellow-500" />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Important Task</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              )}
+              {new Date(task.completeBy) < new Date(Date.now()) &&
+                !task.completed && (
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <AlertCircle className="text-red-500" />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Task Overdue</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                )}
+            </div>
+          </div>
           <p className="line-clamp-3 text-ellipsis">{task.description}</p>
         </div>
         <div className="flex flex-col gap-2">

@@ -1,5 +1,6 @@
 "use client";
 import {
+  AlertCircle,
   Check,
   CheckSquare,
   Folder,
@@ -52,6 +53,12 @@ export default function SidePanelNavigation() {
         title={"Completed"}
         icon={<CheckSquare />}
         onClick={() => router.push("/?tasks=completed")}
+      />
+      <SidePanelButton
+        current={tasks === "overdue"}
+        title={"Overdue"}
+        icon={<AlertCircle />}
+        onClick={() => router.push("/?tasks=overdue")}
       />
       <Collapsible
         open={isOpen}
