@@ -15,7 +15,7 @@ export async function DELETE(
       where: { id: parseInt(id) },
     });
 
-    if (session?.user?.email !== task.email) {
+    if (session?.user?.email !== task?.email) {
       return NextResponse.json(
         {
           message: "You don't have permission to delete these.",

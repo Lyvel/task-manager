@@ -21,7 +21,7 @@ export async function PUT(req: Request) {
       where: { id: id },
     });
 
-    if (ownerOfTask.email !== session?.user?.email) {
+    if (ownerOfTask?.email !== session?.user?.email) {
       console.log("No perms");
       return NextResponse.json({
         message: "You don't have permission to edit this task.",
