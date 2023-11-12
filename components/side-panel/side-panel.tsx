@@ -13,7 +13,7 @@ export default function SidePanel() {
   useClickAway(ref, () => setMenuVisible(false));
   return (
     <>
-      <div className="bg-card rounded-xl lg:w-[300px] h-full lg:flex flex-col justify-between hidden outline outline-1 outline-card-foreground">
+      <div className="bg-card rounded-xl lg:w-[300px] h-full xl:flex flex-col justify-between hidden outline outline-1 outline-card-foreground">
         <SidePanelProfile />
         <SidePanelNavigation />
         <SidePanelSignout />
@@ -24,7 +24,7 @@ export default function SidePanel() {
             menuVisible
               ? "hidden"
               : "" +
-                " lg:hidden bg-card w-[50px] h-[50px] outline outline-1 outline-card-foreground rounded-xl flex justify-center items-center absolute top-24 -left-3"
+                " xl:hidden bg-card w-[50px] h-[50px] outline outline-1 outline-card-foreground rounded-xl flex justify-center items-center absolute top-24 -left-3"
           }
         >
           <Hamburger toggled={menuVisible} size={20} toggle={setMenuVisible} />

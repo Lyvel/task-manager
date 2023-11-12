@@ -4,49 +4,33 @@ import TaskCard from "./task-card";
 import { Button } from "./ui/button";
 import TaskNew from "./task-new";
 import { Fragment, useEffect, useState } from "react";
-import { refresh, session } from "./session";
-
-async function getTasks(email: string) {
-  const response = await fetch("/api/task/" + email, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
-  if (response.ok) {
-    const tasks = await response.json();
-    return tasks;
-  }
-}
+import { categories, refresh, session, tasks } from "./session";
 
 export default function AllTasks({ sp }: { sp: SP }) {
-  const [tasks, setTasks] = useState<Tasks>();
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const fetchTasks = async () => {
-      const tasks = await getTasks(session.serverSession.user.email);
-      setTasks(tasks);
-      setLoading(false);
-    };
-    fetchTasks().catch(console.error);
-  }, [refresh]);
-
+  const cat = categories.find((c) => c.id.toString() === sp.category);
   return (
     <div className="p-5 bg-card rounded-xl w-full gap-4 flex flex-col outline outline-1 outline-card-foreground">
       <div className="flex justify-between">
-        <h1 className="font-bold tracking-wider text-3xl uppercase">
-          {sp.tasks !== "all-cat"
-            ? sp.tasks !== undefined
-              ? sp.tasks + " Tasks"
-              : "All Tasks"
-            : sp.categoryName + " Tasks"}
-        </h1>
+        <div>
+          <h1 className="font-bold tracking-wider text-3xl uppercase">
+            {sp.tasks !== "all-cat"
+              ? sp.tasks !== undefined
+                ? sp.tasks + " Tasks"
+                : "All Tasks"
+              : sp.categoryName + " Tasks"}
+          </h1>
+          {cat && <h2>{cat.description}</h2>}
+        </div>
+
         <Button variant={"ghost"} size={"icon"}>
           <Plus />
         </Button>
       </div>
-      <div className="grid 2xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 overflow-y-auto">
-        {!loading && (
+      {/* className="grid 2xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 overflow-y-auto" */}
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:flex gap-4 overflow-hidden overflow-y-auto xl:flex-wrap">
+        {true && (
           <>
-            {tasks?.tasks.map((task: Task) => (
+            {tasks.map((task: Task) => (
               <Fragment key={task.id}>
                 {sp !== undefined ? (
                   <>
@@ -60,6 +44,9 @@ export default function AllTasks({ sp }: { sp: SP }) {
                       <TaskCard task={task} />
                     )}
                     {sp.tasks === "completed" && task.completed && (
+                      <TaskCard task={task} />
+                    )}
+                    {sp.tasks === "incomplete" && !task.completed && (
                       <TaskCard task={task} />
                     )}
                   </>

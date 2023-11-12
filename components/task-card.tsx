@@ -74,7 +74,7 @@ export default function TaskCard({ task }: { task: Task }) {
     <>
       <div
         className={
-          "p-5 bg-muted rounded-xl flex flex-col justify-between gap-4 m-1 shadow-lg " +
+          "p-5 bg-muted rounded-xl flex flex-col justify-between gap-4 m-1 shadow-lg xl:max-w-xs w-full " +
           (task.important && "")
         }
       >

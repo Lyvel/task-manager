@@ -3,17 +3,14 @@ import { CalendarIcon, Plus, X } from "lucide-react";
 import { Button } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
 import { Input } from "./ui/input";
-import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
-import { FormEvent, useEffect, useState } from "react";
-import { refresh, session, setRefresh } from "./session";
+import { categories, refresh, session, setRefresh } from "./session";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -32,8 +29,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import Link from "next/link";
-import { getCategories } from "./side-panel/side-panel-navigation";
 
 const formSchema = z.object({
   title: z
@@ -58,16 +53,6 @@ export default function TaskEdit({
   newTask: boolean | undefined;
   task: Task | undefined;
 }) {
-  const [categories, setCategories] = useState<Tasks>();
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const fetchCategories = async () => {
-      const tasks = await getCategories(session.serverSession.user.email);
-      setCategories(tasks);
-      setLoading(false);
-    };
-    fetchCategories().catch(console.error);
-  }, []);
   const { toast } = useToast();
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -83,13 +68,12 @@ export default function TaskEdit({
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(parseInt(values.category));
     if (newTask) {
       const response = await fetch("/api/task/new", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email: session?.serverSession.user.email,
+          email: session?.user.email,
           title: values.title,
           description: values.description,
           important: values.important,
@@ -274,8 +258,8 @@ export default function TaskEdit({
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {!loading &&
-                        categories?.categories.map((category) => (
+                      {true &&
+                        categories.map((category) => (
                           <SelectItem
                             value={category.id.toString()}
                             key={category.id}

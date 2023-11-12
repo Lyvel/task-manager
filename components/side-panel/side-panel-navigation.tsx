@@ -1,5 +1,14 @@
 "use client";
-import { Check, Folder, FolderOpen, Home, List, Plus } from "lucide-react";
+import {
+  Check,
+  CheckSquare,
+  Folder,
+  FolderOpen,
+  Home,
+  List,
+  Plus,
+  Square,
+} from "lucide-react";
 import SidePanelButton from "./side-panel-button";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
@@ -7,32 +16,11 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "../ui/collapsible";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CategoryNew from "../category-new";
-import { refresh, session } from "../session";
-
-export async function getCategories(email: string) {
-  const response = await fetch("/api/category/" + email, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
-  if (response.ok) {
-    const categories = await response.json();
-    return categories;
-  }
-}
+import { categories } from "../session";
 
 export default function SidePanelNavigation() {
-  const [categories, setCategories] = useState<Categories>();
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const fetchCategories = async () => {
-      const tasks = await getCategories(session.serverSession.user.email);
-      setCategories(tasks);
-      setLoading(false);
-    };
-    fetchCategories().catch(console.error);
-  }, [refresh]);
   const router = useRouter();
   const searchParams = useSearchParams();
   const tasks = searchParams.get("tasks");
@@ -54,9 +42,15 @@ export default function SidePanelNavigation() {
         onClick={() => router.push("/?tasks=important")}
       />
       <SidePanelButton
+        current={tasks === "incomplete"}
+        title={"Incomplete"}
+        icon={<Square />}
+        onClick={() => router.push("/?tasks=incomplete")}
+      />
+      <SidePanelButton
         current={tasks === "completed"}
         title={"Completed"}
-        icon={<Check />}
+        icon={<CheckSquare />}
         onClick={() => router.push("/?tasks=completed")}
       />
       <Collapsible
@@ -67,14 +61,14 @@ export default function SidePanelNavigation() {
         <CollapsibleTrigger className="w-full">
           <SidePanelButton
             current={tasks === "custom-categories"}
-            title={"Custom Categories"}
+            title={"Categories"}
             icon={isOpen ? <FolderOpen /> : <Folder />}
           />
         </CollapsibleTrigger>
         <CollapsibleContent className="max-h-[32rem] overflow-y-auto overflow-x-hidden">
-          {!loading && (
+          {true && (
             <>
-              {categories?.categories.map((cat: Category) => (
+              {categories.map((cat: Category) => (
                 <SidePanelButton
                   key={cat.id}
                   current={category === cat.id.toString()}

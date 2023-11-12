@@ -58,7 +58,7 @@ export default function CategoryNew({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email: session?.serverSession.user.email,
+          email: session?.user.email,
           title: values.title,
           description: values.description,
         }),

@@ -63,7 +63,7 @@ export default function SidePanelButton({
       <div
         className={
           className +
-          " flex gap-4 justify-between w-full pl-10 hover:bg-muted hover:cursor-pointer" +
+          " group flex gap-4 justify-between w-full pl-10 hover:bg-muted hover:cursor-pointer" +
           (current ? " bg-muted" : "")
         }
         onClick={onClick}
@@ -71,7 +71,7 @@ export default function SidePanelButton({
         <div className={"flex gap-4 justify-between items-center py-2 w-full"}>
           {category && (
             <Edit
-              className="block hover:text-primary"
+              className="hover:text-primary hidden group-hover:block"
               onClick={(e) => {
                 e.stopPropagation();
                 setShowNewCat(true);
@@ -80,14 +80,16 @@ export default function SidePanelButton({
           )}
           {icon}
           <div className="flex justify-between items-center w-full">
-            <h1>{title}</h1>
+            <h1 className="max-w-[115px] text-ellipsis whitespace-nowrap overflow-hidden">
+              {title}
+            </h1>
             {category && (
               <AlertDialog>
                 <AlertDialogTrigger asChild>
                   <Trash
                     size={20}
                     onClick={(e) => e.stopPropagation()}
-                    className="hover:text-red-500 -translate-x-8"
+                    className="hover:text-red-500 -translate-x-8 hidden group-hover:block"
                   />
                 </AlertDialogTrigger>
                 <AlertDialogContent>
@@ -111,11 +113,6 @@ export default function SidePanelButton({
             )}
           </div>
         </div>
-        {current ? (
-          <div className={"h-full w-[2px] bg-green-500"}></div>
-        ) : (
-          <></>
-        )}
       </div>
     </>
   );

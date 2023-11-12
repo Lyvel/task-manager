@@ -29,9 +29,7 @@ type ServerSession = {
   };
 };
 
-type Tasks = {
-  tasks: Task[];
-};
+type Tasks = Task[];
 
 type SP = {
   tasks: string;
@@ -48,6 +46,4 @@ type Category = {
   updatedAt: string;
 };
 
-type Categories = {
-  categories: Category[];
-};
+type Categories = Category[];
