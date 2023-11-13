@@ -24,7 +24,7 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { useToast } from "./ui/use-toast";
 import { useRouter } from "next/navigation";
-import { ColourPicker, PickerExample } from "./colour-picker";
+import { ColourPicker } from "./colour-picker";
 
 const formSchema = z.object({
   title: z

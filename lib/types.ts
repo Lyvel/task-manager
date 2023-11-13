@@ -35,6 +35,7 @@ type SP = {
   tasks: string;
   category: string;
   categoryName: string;
+  settings: string;
 };
 
 type Category = {

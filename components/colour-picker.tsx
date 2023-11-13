@@ -7,24 +7,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { Paintbrush } from "lucide-react";
-import Link from "next/link";
-import { useMemo, useState } from "react";
-
-export function PickerExample() {
-  const [background, setBackground] = useState("#ffffff");
-
-  return (
-    <div
-      className="w-full h-full preview flex min-h-[50px] justify-center p-10 items-center rounded !bg-cover !bg-center transition-all"
-      style={{ background }}
-    >
-      <ColourPicker background={background} setBackground={setBackground} />
-    </div>
-  );
-}
+import { useMemo } from "react";
 
 export function ColourPicker({
   background,
@@ -100,22 +85,3 @@ export function ColourPicker({
     </Popover>
   );
 }
-
-const GradientButton = ({
-  background,
-  children,
-}: {
-  background: string;
-  children: React.ReactNode;
-}) => {
-  return (
-    <div
-      className="p-0.5 rounded-md relative !bg-cover !bg-center transition-all"
-      style={{ background }}
-    >
-      <div className="bg-popover/80 rounded-md p-1 text-xs text-center">
-        {children}
-      </div>
-    </div>
-  );
-};

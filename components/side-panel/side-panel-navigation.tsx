@@ -31,7 +31,10 @@ export default function SidePanelNavigation() {
   return (
     <div className="flex flex-col w-full">
       <SidePanelButton
-        current={tasks === "all" || tasks === null}
+        current={
+          tasks === "all" ||
+          (tasks === null && searchParams.get("settings") === null)
+        }
         title={"All Tasks"}
         icon={<Home />}
         onClick={() => router.push("/?tasks=all")}
