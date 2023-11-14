@@ -13,10 +13,10 @@ export default function UserSettings() {
         </div>
       </div>
       <div>
-        <Avatar className="w-[75px] h-auto">
+        {/* <Avatar className="w-[75px] h-auto">
           <AvatarImage src={session?.user?.image as string} />
           <AvatarFallback>{session?.user?.name}</AvatarFallback>
-        </Avatar>
+        </Avatar> */}
       </div>
     </div>
   );
