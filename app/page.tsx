@@ -1,6 +1,5 @@
 import HomePage from "@/components/home";
-import LoginPage from "@/components/login-page";
-import { ModeToggle } from "@/components/theme-toggle";
+import LandingPage from "@/components/landing-page/landing-page";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 
@@ -14,9 +13,12 @@ export default async function Home({
     return <HomePage searchParams={searchParams as SP} />;
   }
   return (
-    <main>
-      <ModeToggle />
-      <LoginPage />
-    </main>
+    <>
+      {session ? (
+        <HomePage searchParams={searchParams as SP} />
+      ) : (
+        <LandingPage />
+      )}
+    </>
   );
 }
