@@ -4,7 +4,7 @@
 
 This web application is a task manager that allows users to log in, create tasks, and organize them efficiently. Built with Next.js, it features a user-friendly interface and robust functionality to enhance productivity.
 
-[Live Demo]() - Not Available at the moment
+[Live Demo](https://task-manager-lyvel.vercel.app/)
 
 ## Getting Started
 
