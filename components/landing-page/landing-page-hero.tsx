@@ -27,7 +27,7 @@ export default function LandingPageHero() {
         </Link>
         <Link
           href={""}
-          className="outline-foreground outline outline-1 flex px-5 py-3 rounded-lg gap-2 hover:bg-primary"
+          className="outline-foreground outline outline-1 flex px-5 py-3 rounded-lg gap-2 hover:bg-secondary-foreground hover:text-secondary"
         >
           Learn More
         </Link>
