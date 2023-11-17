@@ -15,7 +15,7 @@ export default function LandingPageWhyUs() {
         Solution for Seamless Organization, Enhanced Collaboration, and
         Unmatched Productivity
       </p>
-      <div className="flex flex-col gap-12">
+      <div className="flex flex-col gap-12 py-16">
         <div className="bg-secondary rounded-lg p-10 flex justify-between">
           <div className="flex flex-col justify-center gap-4 w-[492px]">
             <h1 className="text-4xl font-semibold">Efficiency Amplified</h1>
