@@ -1,5 +1,7 @@
+"use client";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { signIn } from "next-auth/react";
 
 export default function LandingPageNavbar() {
   return (
@@ -23,6 +25,7 @@ export default function LandingPageNavbar() {
         <div>
           <Link
             href={""}
+            onClick={() => signIn("google")}
             className="bg-foreground text-background flex px-5 py-3 rounded-lg gap-2 hover:bg-primary"
           >
             Get Started
