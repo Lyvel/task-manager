@@ -1,4 +1,5 @@
 import { ModeToggle } from "../theme-toggle";
+import LandingPageCTA from "./landing-page-cta";
 import LandingPageDashboard from "./landing-page-dashboard";
 import LandingPageFeatures from "./landing-page-features";
 import LandingPageHero from "./landing-page-hero";
@@ -16,6 +17,7 @@ export default function LandingPage() {
       <LandingPageWhyUs />
       <LandingPageFeatures />
       <LandingPageTestimonials />
+      <LandingPageCTA />
     </div>
   );
 }
