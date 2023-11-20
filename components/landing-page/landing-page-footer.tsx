@@ -17,23 +17,18 @@ export default function LandingPageFooter() {
           </Link>
         </li>
         <li>
-          <Link href={"/"} className="hover:text-primary">
-            About
+          <Link href={"#features"} className="hover:text-primary">
+            Features
           </Link>
         </li>
         <li>
           <Link href={"/"} className="hover:text-primary">
-            Package
+            Team
           </Link>
         </li>
         <li>
           <Link href={"/"} className="hover:text-primary">
             Contact Us
-          </Link>
-        </li>
-        <li>
-          <Link href={"/"} className="hover:text-primary">
-            Blog
           </Link>
         </li>
       </ul>
