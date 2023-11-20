@@ -5,7 +5,7 @@ import f3 from "../../public/f3.png";
 
 export default function LandingPageFeatures() {
   return (
-    <div className="bg-foreground text-background">
+    <div className="bg-foreground text-background dark:bg-secondary dark:text-foreground">
       <div className="w-[1100px] m-auto pt-32 flex flex-col gap-5">
         <h1 className="text-center text-5xl font-bold">
           Unleashing the Power of Seamless Task Management
