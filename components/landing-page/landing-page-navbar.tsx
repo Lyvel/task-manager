@@ -2,8 +2,10 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { signIn } from "next-auth/react";
+import { useTheme } from "next-themes";
 
 export default function LandingPageNavbar() {
+  const { setTheme } = useTheme();
   return (
     <nav className="py-6 w-screen m-auto sticky top-0 bg-background">
       <div className="flex justify-between items-center w-[1200px] m-auto">
@@ -12,10 +14,18 @@ export default function LandingPageNavbar() {
           <Link href={""} className="hover:text-primary">
             Home
           </Link>
-          <Link href={""} className="hover:text-primary">
+          <Link
+            href={""}
+            onClick={() => setTheme("light")}
+            className="hover:text-primary"
+          >
             Features
           </Link>
-          <Link href={""} className="hover:text-primary">
+          <Link
+            href={""}
+            onClick={() => setTheme("dark")}
+            className="hover:text-primary"
+          >
             Team
           </Link>
           <Link href={""} className="hover:text-primary">
