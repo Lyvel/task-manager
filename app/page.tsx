@@ -13,12 +13,12 @@ export default async function Home({
     return <HomePage searchParams={searchParams as SP} />;
   }
   return (
-    <>
+    <main className="overflow-hidden">
       {session ? (
         <HomePage searchParams={searchParams as SP} />
       ) : (
         <LandingPage />
       )}
-    </>
+    </main>
   );
 }
