@@ -15,15 +15,15 @@ export default function LandingPageNavbar() {
             Home
           </Link>
           <Link
-            href={""}
-            onClick={() => setTheme("light")}
+            href={"#features"}
+            // onClick={() => setTheme("light")}
             className="hover:text-primary"
           >
             Features
           </Link>
           <Link
             href={""}
-            onClick={() => setTheme("dark")}
+            // onClick={() => setTheme("dark")}
             className="hover:text-primary"
           >
             Team

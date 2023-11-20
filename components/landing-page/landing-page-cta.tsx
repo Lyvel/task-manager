@@ -8,7 +8,7 @@ export default function LandingPageCTA() {
         Ready to Transform Your Workflow?
       </h1>
       <p className="leading-7 text-xl text-center w-[1100px]">
-        Take the First Step with OrganizeHub and Experience Effortless Task
+        Take the First Step with Task Forge and Experience Effortless Task
         Management. Join Now for a Smoother, More Productive Tomorrow.
       </p>
       <Link
