@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Menu } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { useTheme } from "next-themes";
 
@@ -8,22 +8,22 @@ export default function LandingPageNavbar() {
   const { setTheme } = useTheme();
   return (
     <nav className="py-6 w-screen m-auto sticky top-0 bg-background">
-      <div className="flex justify-between items-center w-[1200px] m-auto">
+      <div className="flex justify-between items-center lg:w-[1200px] m-auto px-4 lg:px-0">
         <h1 className="font-extrabold text-4xl">Task Forge</h1>
-        <div className="flex gap-8 font-medium">
+        <div className="hidden lg:flex gap-8 font-medium">
           <Link href={""} className="hover:text-primary">
             Home
           </Link>
           <Link
             href={"#features"}
-            // onClick={() => setTheme("light")}
+            onClick={() => setTheme("light")}
             className="hover:text-primary"
           >
             Features
           </Link>
           <Link
             href={""}
-            // onClick={() => setTheme("dark")}
+            onClick={() => setTheme("dark")}
             className="hover:text-primary"
           >
             Team
@@ -32,7 +32,7 @@ export default function LandingPageNavbar() {
             Contact
           </Link>
         </div>
-        <div>
+        <div className="hidden lg:block">
           <Link
             href={""}
             onClick={() => signIn("google")}
@@ -41,6 +41,9 @@ export default function LandingPageNavbar() {
             Get Started
             <ArrowRight />
           </Link>
+        </div>
+        <div className="lg:hidden">
+          <Menu size={50} />
         </div>
       </div>
     </nav>

@@ -11,7 +11,7 @@ import {
 
 export default function LandingPageIcons() {
   return (
-    <>
+    <div className="hidden lg:block">
       <div className="w-[64px] h-[64px] rounded-3xl border p-4 flex justify-center items-center absolute top-[138px] left-[calc(50vw-507px)] rotate-[26deg]">
         <Layers3 size={"large"} />
       </div>
@@ -36,6 +36,6 @@ export default function LandingPageIcons() {
       <div className="w-[64px] h-[64px] rounded-3xl border p-4 flex justify-center items-center absolute top-[971px] left-[calc(50vw+536px)] rotate-[26deg]">
         <Gamepad2 size={"large"} />
       </div>
-    </>
+    </div>
   );
 }
