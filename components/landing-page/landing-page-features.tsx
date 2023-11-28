@@ -6,11 +6,11 @@ import f3 from "../../public/f3.png";
 export default function LandingPageFeatures() {
   return (
     <div
-      className="bg-foreground text-background dark:bg-secondary dark:text-foreground"
+      className="bg-foreground text-background dark:bg-secondary dark:text-foreground py-8 lg:py-32 px-4"
       id="features"
     >
-      <div className="w-[1100px] m-auto pt-32 flex flex-col gap-5">
-        <h1 className="text-center text-5xl font-bold">
+      <div className="lg:w-[1100px] m-auto flex flex-col gap-5">
+        <h1 className="text-center lg:text-5xl text-[32px] font-bold">
           Unleashing the Power of Seamless Task Management
         </h1>
         <p className="text-xl text-center">
@@ -18,7 +18,7 @@ export default function LandingPageFeatures() {
           That Make Task Forge the Ultimate Task Management Solution
         </p>
       </div>
-      <div className="w-[1200px] m-auto py-32 grid grid-cols-3 gap-5">
+      <div className="lg:w-[1200px] m-auto pt-32 grid lg:grid-cols-3 gap-5">
         <div className="p-6 bg-background text-foreground rounded-3xl">
           <Image src={f1} width={348} height={193} alt="f1" />
           <h1 className="text-2xl font-semibold pt-4">

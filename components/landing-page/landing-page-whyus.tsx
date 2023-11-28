@@ -33,7 +33,9 @@ export default function LandingPageWhyUs() {
         <div className="bg-secondary rounded-lg lg:p-10 p-4 flex flex-col-reverse lg:flex-row justify-between">
           <Image src={si1} width={476} height={346} alt="Boc1" />
           <div className="flex flex-col justify-center gap-6 lg:gap-4 lg:w-[492px]">
-            <h1 className="text-4xl font-semibold">Customizable Workflows</h1>
+            <h1 className="lg:text-4xl text-[28px] font-semibold">
+              Customizable Workflows
+            </h1>
             <p className="leading-snug">
               Tailor Task Forge to fit your unique work style. Our customizable
               workflows empower you to adapt the platform to your specific
@@ -44,7 +46,9 @@ export default function LandingPageWhyUs() {
         </div>
         <div className="bg-secondary rounded-lg lg:p-10 p-4 flex flex-col lg:flex-row justify-between">
           <div className="flex flex-col justify-center gap-6 lg:gap-4 lg:w-[492px]">
-            <h1 className="text-4xl font-semibold">Time Management Mastery</h1>
+            <h1 className="lg:text-4xl text-[28px] font-semibold">
+              Time Management Mastery
+            </h1>
             <p className="leading-snug">
               Make control of your time like never before. Task Forge&apos;s
               time management features empower you to set realistic deadlines,
