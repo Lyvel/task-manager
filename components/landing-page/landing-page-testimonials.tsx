@@ -12,8 +12,8 @@ const OPTIONS: EmblaOptionsType = {
 
 export default function LandingPageTestimonials() {
   return (
-    <div className="w-[1100px] m-auto py-32">
-      <h1 className="text-center text-5xl font-semibold leading-[55px]">
+    <div className="lg:w-[1100px] m-auto py-16 lg:py-32 px-4 lg:px-0">
+      <h1 className="text-center text-[32px] font-bold lg:text-5xl lg:font-semibold leading-[55px]">
         Inspiring Testimonials:
         <br /> Hear the Voices of Success
       </h1>
@@ -67,8 +67,8 @@ function TestimonialCard({
 }) {
   const { onPrevButtonClick, onNextButtonClick } = usePrevNextButtons(api);
   return (
-    <div className="mt-16 bg-secondary rounded-lg p-10 flex flex-col justify-center items-center gap-8 h-full mx-10">
-      <p className="text-2xl font-semibold text-center leading-[40px]">
+    <div className="mt-16 bg-secondary rounded-lg p-10 flex flex-col justify-center items-center gap-8 lg:h-full mx-10">
+      <p className="lg:text-2xl font-semibold text-center leading-relaxed lg:leading-[40px]">
         {description}
       </p>
       <div className="flex items-center gap-3">
@@ -76,9 +76,9 @@ function TestimonialCard({
           <AvatarImage src={image} />
           <AvatarFallback>{name?.at(0)}</AvatarFallback>
         </Avatar>
-        <h1 className="leading-tight font-semibold">{name}</h1>
-        <p className="leading-tight font-semibold">/</p>
-        <h2 className="font-light text-gray-500">{role}</h2>
+        <h1 className="leading-tight font-semibold text-center">{name}</h1>
+        <p className="leading-tight font-semibold text-center">/</p>
+        <h2 className="font-light text-gray-500 text-center">{role}</h2>
       </div>
       <div className="flex gap-6 text-gray-500">
         <ArrowLeft
