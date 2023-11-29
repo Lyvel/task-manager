@@ -5,6 +5,7 @@ import SidePanel from "./side-panel/side-panel";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 import UserSettings from "./user/user-settings";
+import SidePanelV2 from "./side-panel-v2/side-panel-v2";
 
 export default async function HomePage({ searchParams }: { searchParams: SP }) {
   const session = await getServerSession(authOptions);
@@ -28,15 +29,15 @@ export default async function HomePage({ searchParams }: { searchParams: SP }) {
   console.log(searchParams);
 
   return (
-    <div className="h-screen flex p-4 gap-4">
+    <div className="h-screen flex">
       <SessionProv
         serverSession={session as ServerSession}
         serverCategories={categories as Categories}
         serverTasks={tasks as Tasks}
         serverSearchParams={searchParams}
       />
-      <SidePanel />
-      {searchParams.settings === "" ? <UserSettings /> : <AllTasks />}
+      <SidePanelV2 />
+      {/* {searchParams.settings === "" ? <UserSettings /> : <AllTasks />} */}
     </div>
   );
 }
