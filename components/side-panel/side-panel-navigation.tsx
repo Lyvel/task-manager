@@ -29,6 +29,67 @@ export default function SidePanelNavigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [showNewCat, setShowNewCat] = useState(false);
   return (
+    <div className="flex flex-col w-full pt-6">
+      <SidePanelButton
+        current={
+          tasks === "all" ||
+          (tasks === null && searchParams.get("settings") === null)
+        }
+        title={"Tasks"}
+        icon={
+          <Home
+            color={
+              tasks === "all" ||
+              (tasks === null && searchParams.get("settings") === null)
+                ? "#ffffff"
+                : "#000000"
+            }
+          />
+        }
+        onClick={() => router.push("/?tasks=all")}
+      />
+      <Collapsible
+        open={isOpen}
+        onOpenChange={setIsOpen}
+        className="w-full z-0"
+      >
+        <CollapsibleTrigger className="w-full">
+          <SidePanelButton
+            current={tasks === "custom-categories"}
+            title={"Categories"}
+            icon={isOpen ? <FolderOpen /> : <Folder />}
+          />
+        </CollapsibleTrigger>
+        <CollapsibleContent className="max-h-[32rem] overflow-y-auto overflow-x-hidden">
+          {true && (
+            <>
+              {categories.map((cat: Category) => (
+                <SidePanelButton
+                  key={cat.id}
+                  current={category === cat.id.toString()}
+                  title={cat.title}
+                  icon={<Folder color={cat.colour} />}
+                  onClick={() =>
+                    router.push("/?tasks=all-cat&category=" + cat.id)
+                  }
+                  category={cat}
+                />
+              ))}
+            </>
+          )}
+          <SidePanelButton
+            current={false}
+            title={"Add New Category"}
+            icon={<Plus />}
+            className="pl-6 hover:bg-muted text-sm"
+            onClick={() => setShowNewCat(true)}
+          />
+        </CollapsibleContent>
+      </Collapsible>
+      {showNewCat && <CategoryNew show={setShowNewCat} newCategory />}
+    </div>
+  );
+  return (
     <div className="flex flex-col w-full">
       <SidePanelButton
         current={

@@ -62,13 +62,15 @@ export default function SidePanelButton({
       {showNewCat && <CategoryNew show={setShowNewCat} category={category} />}
       <div
         className={
-          className +
-          " group flex gap-4 justify-between w-full pl-10 hover:bg-muted hover:cursor-pointer" +
-          (current ? " bg-muted" : "")
+          " group flex justify-between w-full p-2 rounded-lg hover:cursor-pointer text-lg" +
+          (current ? " bg-primary text-white" : " hover:bg-muted") +
+          (category && " pl-6") +
+          " " +
+          className
         }
         onClick={onClick}
       >
-        <div className={"flex gap-4 justify-between items-center py-2 w-full"}>
+        <div className={"flex gap-4 justify-between items-center w-full"}>
           {category && (
             <Edit
               className="hover:text-primary hidden group-hover:block"
@@ -80,7 +82,13 @@ export default function SidePanelButton({
           )}
           {icon}
           <div className="flex justify-between items-center w-full">
-            <h1 className="max-w-[115px] text-ellipsis whitespace-nowrap overflow-hidden">
+            <h1
+              className={
+                "max-w-[115px]  tracking-light text-ellipsis whitespace-nowrap overflow-hidden " +
+                (category !== undefined ? " text-sm" : " max-w-[150px]") +
+                (current ? " text-white" : "")
+              }
+            >
               {title}
             </h1>
             {category && (
@@ -89,7 +97,7 @@ export default function SidePanelButton({
                   <Trash
                     size={20}
                     onClick={(e) => e.stopPropagation()}
-                    className="hover:text-red-500 -translate-x-8 hidden group-hover:block"
+                    className="hover:text-red-500 hidden group-hover:block"
                   />
                 </AlertDialogTrigger>
                 <AlertDialogContent>

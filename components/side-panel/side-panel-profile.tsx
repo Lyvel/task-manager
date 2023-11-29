@@ -8,17 +8,12 @@ export default function SidePanelProfile() {
   return (
     <>
       {session ? (
-        <div
-          className={`m-10 flex gap-4 justify-center items-center hover:bg-muted p-2 rounded-lg hover:cursor-pointer ${
-            searchParams.settings === "" && "bg-muted"
-          }`}
-          onClick={() => router.push("/?settings=")}
-        >
+        <div className={`mt-4 flex gap-4 items-center `}>
           <Avatar className="w-[75px] h-auto">
             <AvatarImage src={session?.user?.image as string} />
             <AvatarFallback>{session?.user?.name}</AvatarFallback>
           </Avatar>
-          <h1 className="text-xl line-clamp-2">{session?.user?.name}</h1>
+          <h1 className="font-semibold line-clamp-2">{session?.user?.name}</h1>
         </div>
       ) : (
         <div>FAILED</div>
