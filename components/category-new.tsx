@@ -6,7 +6,7 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { FormEvent, useEffect, useState } from "react";
-import { refresh, session, setRefresh } from "./session";
+import { refresh, session, setRefresh } from "./session-provider";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

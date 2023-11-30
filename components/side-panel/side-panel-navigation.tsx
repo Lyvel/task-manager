@@ -19,7 +19,7 @@ import {
 } from "../ui/collapsible";
 import { useState } from "react";
 import CategoryNew from "../category-new";
-import { categories } from "../session";
+import { categories } from "../session-provider";
 
 export default function SidePanelNavigation() {
   const router = useRouter();

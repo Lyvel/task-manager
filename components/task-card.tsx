@@ -23,7 +23,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "./ui/alert-dialog";
-import { categories, refresh, setRefresh } from "./session";
+import { categories, refresh, setRefresh } from "./session-provider";
 import {
   Tooltip,
   TooltipContent,

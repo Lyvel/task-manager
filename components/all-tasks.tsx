@@ -4,7 +4,13 @@ import TaskCard from "./task-card";
 import { Button } from "./ui/button";
 import TaskNew from "./task-new";
 import { Fragment, useEffect, useState } from "react";
-import { categories, refresh, searchParams, session, tasks } from "./session";
+import {
+  categories,
+  refresh,
+  searchParams,
+  session,
+  tasks,
+} from "./session-provider";
 
 export default function AllTasks() {
   const cat = categories.find((c) => c.id.toString() === searchParams.category);

@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import AllTasks from "./all-tasks";
-import SessionProv from "./session";
+import SessionProv from "./session-provider";
 import SidePanel from "./side-panel/side-panel";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
@@ -25,8 +25,6 @@ export default async function HomePage({ searchParams }: { searchParams: SP }) {
       },
     },
   });
-
-  console.log(searchParams);
 
   return (
     <div className="h-screen flex">

@@ -15,7 +15,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
-import { refresh, setRefresh } from "../session";
+import { refresh, setRefresh } from "../session-provider";
 import { useState } from "react";
 import CategoryNew from "../category-new";
 
