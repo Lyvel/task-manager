@@ -35,6 +35,7 @@ export default async function HomePage({ searchParams }: { searchParams: SP }) {
         serverSearchParams={searchParams}
       />
       <SidePanelV2 />
+      <AllTasks />
       {/* {searchParams.settings === "" ? <UserSettings /> : <AllTasks />} */}
     </div>
   );

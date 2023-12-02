@@ -1,5 +1,5 @@
 "use client";
-import { Plus } from "lucide-react";
+import { Plus, Search } from "lucide-react";
 import TaskCard from "./task-card";
 import { Button } from "./ui/button";
 import TaskNew from "./task-new";
@@ -15,10 +15,12 @@ import {
 export default function AllTasks() {
   const cat = categories.find((c) => c.id.toString() === searchParams.category);
   return (
-    <div className="p-5 bg-card rounded-xl w-full gap-4 flex flex-col outline outline-1 outline-card-foreground">
-      <div className="flex justify-between">
-        <div>
-          <h1 className="font-bold tracking-wider text-3xl uppercase">
+    <div className=" bg-muted w-full flex flex-col ">
+      <div className="flex justify-between h-fit bg-card py-6 px-8 border-b border-indigo-100">
+        <div className="bg-muted flex gap-3 py-2 px-3 w-[360px] rounded-full text-slate-400 items-center cursor-text">
+          <Search size={20} />
+          Search
+          {/* <h1 className="font-bold tracking-wider text-3xl uppercase">
             {searchParams.tasks !== "all-cat"
               ? searchParams.tasks !== undefined
                 ? searchParams.tasks + " Tasks"
@@ -27,14 +29,15 @@ export default function AllTasks() {
                   ({ id }) => id.toString() === searchParams.category
                 )?.title + " Tasks"}
           </h1>
-          {cat && <h2>{cat.description}</h2>}
+          {cat && <h2>{cat.description}</h2>} */}
         </div>
 
-        <Button variant={"ghost"} size={"icon"}>
+        <Button variant={"default"} className="gap-2 rounded-full">
           <Plus />
+          Create New Tasks
         </Button>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 2xl:flex gap-4 overflow-hidden overflow-y-auto 2xl:flex-wrap p-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 overflow-hidden overflow-y-auto p-8">
         {true && (
           <>
             {tasks.map((task: Task) => (

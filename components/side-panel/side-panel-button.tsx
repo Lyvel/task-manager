@@ -63,7 +63,7 @@ export default function SidePanelButton({
       <div
         className={
           " group flex justify-between w-full p-2 rounded-lg hover:cursor-pointer text-lg" +
-          (current ? " bg-primary text-white" : " hover:bg-muted") +
+          (current ? " bg-primary text-white" : " hover:bg-muted ") +
           (category && " pl-6") +
           " " +
           className

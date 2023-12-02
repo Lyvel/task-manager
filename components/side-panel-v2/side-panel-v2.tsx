@@ -11,6 +11,7 @@ export default function SidePanelV2() {
         <SidePanelProfile />
         <SidePanelNavigation />
       </span>
+      <SidePanelSignout />
     </div>
   );
 }

@@ -86,7 +86,7 @@ export default function TaskCard({ task }: { task: Task }) {
   return (
     <>
       <div
-        className={`p-5 bg-muted rounded-xl flex flex-col justify-between gap-4 m-1 shadow-lg 2xl:max-w-xs w-full ${
+        className={`p-5 bg-background rounded-xl flex flex-col justify-between gap-4 m-1 shadow-lg 2xl:max-w-xs w-full hover:bg-muted cursor-pointer ${
           task.category !== 0 && ` outline outline-2`
         } `}
         style={{
@@ -94,12 +94,17 @@ export default function TaskCard({ task }: { task: Task }) {
         }}
       >
         <div className="flex flex-col gap-2">
+          {task.important && (
+            <span className="uppercase px-2.5 bg-red-400 bg-opacity-20 w-fit rounded-full py-1 text-red-400 font-bold text-xs leading-none tracking-widest">
+              High
+            </span>
+          )}
           <div className="flex justify-between">
             <h1 className="text-xl font-bold tracking-wider  overflow-hidden text-ellipsis whitespace-nowrap">
               {task.title}
             </h1>
             <div className="flex gap-2">
-              {task.important && (
+              {/* {task.important && (
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger>
@@ -110,7 +115,7 @@ export default function TaskCard({ task }: { task: Task }) {
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
-              )}
+              )} */}
               {new Date(task.completeBy) < new Date(Date.now()) &&
                 !task.completed && (
                   <TooltipProvider>
