@@ -1,7 +1,7 @@
 "use client";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { searchParams, session } from "../session-provider";
 import { useRouter } from "next/navigation";
+import { searchParams, session } from "../providers/session-provider";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 export default function SidePanelProfile() {
   const router = useRouter();

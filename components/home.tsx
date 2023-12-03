@@ -1,11 +1,9 @@
-import { getServerSession } from "next-auth";
-import AllTasks from "./all-tasks";
-import SessionProv from "./session-provider";
-import SidePanel from "./side-panel/side-panel";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
-import UserSettings from "./user/user-settings";
-import SidePanelV2 from "./side-panel-v2/side-panel-v2";
+import { getServerSession } from "next-auth";
+import SessionProv from "./providers/session-provider";
+import SidePanel from "./side-panel/side-panel";
+import AllTasks from "./task/all-tasks";
 
 export default async function HomePage({ searchParams }: { searchParams: SP }) {
   const session = await getServerSession(authOptions);
@@ -24,6 +22,9 @@ export default async function HomePage({ searchParams }: { searchParams: SP }) {
         equals: email,
       },
     },
+    orderBy: {
+      completeBy: "desc",
+    },
   });
 
   return (
@@ -34,7 +35,7 @@ export default async function HomePage({ searchParams }: { searchParams: SP }) {
         serverTasks={tasks as Tasks}
         serverSearchParams={searchParams}
       />
-      <SidePanelV2 />
+      <SidePanel />
       <AllTasks />
       {/* {searchParams.settings === "" ? <UserSettings /> : <AllTasks />} */}
     </div>

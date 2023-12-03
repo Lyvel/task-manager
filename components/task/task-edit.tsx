@@ -1,19 +1,21 @@
 "use client";
+import { cn } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
 import { CalendarIcon, Plus, X } from "lucide-react";
-import { Button } from "./ui/button";
-import { Checkbox } from "./ui/checkbox";
-import { Input } from "./ui/input";
-import { Textarea } from "./ui/textarea";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 import {
   categories,
   refresh,
   searchParams,
   session,
   setRefresh,
-} from "./session-provider";
-import * as z from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+} from "../providers/session-provider";
+import { Button } from "../ui/button";
+import { Calendar } from "../ui/calendar";
+import { Checkbox } from "../ui/checkbox";
 import {
   Form,
   FormControl,
@@ -21,20 +23,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./ui/form";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { Calendar } from "./ui/calendar";
-import { format } from "date-fns";
-import { cn } from "@/lib/utils";
-import { useToast } from "./ui/use-toast";
-import { useRouter } from "next/navigation";
+} from "../ui/form";
+import { Input } from "../ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
+} from "../ui/select";
+import { Textarea } from "../ui/textarea";
+import { useToast } from "../ui/use-toast";
 
 const formSchema = z.object({
   title: z
@@ -46,7 +46,7 @@ const formSchema = z.object({
     .min(1, { message: "Description must be at least 1 character." }),
   important: z.boolean(),
   completed: z.boolean(),
-  completeBy: z.date().min(new Date(Date.now())),
+  completeBy: z.date(),
   category: z.string(),
 });
 
@@ -57,7 +57,7 @@ export default function TaskEdit({
 }: {
   show: Function;
   newTask: boolean | undefined;
-  task: Task | undefined;
+  task?: Task | undefined;
 }) {
   const { toast } = useToast();
   const router = useRouter();
@@ -69,7 +69,11 @@ export default function TaskEdit({
       important: task ? task.important : false,
       completed: task ? task.completed : false,
       completeBy: task ? new Date(task.completeBy) : new Date(Date.now()),
-      category: task ? task.category.toString() : searchParams.category,
+      category: task
+        ? task.category.toString()
+        : searchParams.category
+        ? searchParams.category
+        : "",
     },
   });
 
@@ -137,7 +141,7 @@ export default function TaskEdit({
 
   return (
     <div
-      className="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-80 flex backdrop-blur"
+      className="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-80 flex backdrop-blur z-10"
       onClick={() => show(false)}
     >
       <div
@@ -260,7 +264,7 @@ export default function TaskEdit({
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a verified email to display" />
+                        <SelectValue placeholder="Select a category" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>

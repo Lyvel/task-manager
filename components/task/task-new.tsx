@@ -1,14 +1,14 @@
 "use client";
 import { Delete, DeleteIcon, FileEdit, Plus, Trash } from "lucide-react";
-import { Button } from "./ui/button";
-import TaskEdit from "./task-edit";
 import { useState } from "react";
+import { Button } from "../ui/button";
+import TaskEdit from "./task-edit";
 
 export default function TaskNew() {
   const [showEdit, setShowEdit] = useState(false);
   return (
     <>
-      <div
+      {/* <div
         className="p-5 bg-background rounded-xl w-full 2xl:max-w-xs flex flex-col gap-4 cursor-pointer min-w-fit  hover:bg-muted shadow-lg"
         onClick={() => setShowEdit(true)}
       >
@@ -16,10 +16,17 @@ export default function TaskNew() {
           <h1 className="font-bold text-xl">Add new Task</h1>
           <Plus />
         </div>
-      </div>
-      {showEdit && (
-        <TaskEdit show={setShowEdit} newTask={true} task={undefined} />
-      )}
+      </div> */}
+
+      <Button
+        variant={"default"}
+        className="gap-2 rounded-full"
+        onClick={() => setShowEdit(true)}
+      >
+        <Plus />
+        Create New Tasks
+      </Button>
+      {showEdit && <TaskEdit show={setShowEdit} newTask={true} />}
     </>
   );
 }

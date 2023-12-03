@@ -1,5 +1,5 @@
 "use client";
-import { session } from "../session-provider";
+import { session } from "../providers/session-provider";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 export default function UserSettings() {

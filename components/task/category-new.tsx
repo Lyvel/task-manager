@@ -1,15 +1,17 @@
 "use client";
-import { CalendarIcon, Plus, X } from "lucide-react";
-import { Button } from "./ui/button";
-import { Checkbox } from "./ui/checkbox";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
-import { Textarea } from "./ui/textarea";
-import { FormEvent, useEffect, useState } from "react";
-import { refresh, session, setRefresh } from "./session-provider";
-import * as z from "zod";
-import { useForm } from "react-hook-form";
+import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
+import { CalendarIcon, Plus, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { FormEvent, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { ColourPicker } from "../misc/colour-picker";
+import { refresh, session, setRefresh } from "../providers/session-provider";
+import { Button } from "../ui/button";
+import { Calendar } from "../ui/calendar";
+import { Checkbox } from "../ui/checkbox";
 import {
   Form,
   FormControl,
@@ -17,14 +19,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./ui/form";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { Calendar } from "./ui/calendar";
-import { format } from "date-fns";
-import { cn } from "@/lib/utils";
-import { useToast } from "./ui/use-toast";
-import { useRouter } from "next/navigation";
-import { ColourPicker } from "./colour-picker";
+} from "../ui/form";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Textarea } from "../ui/textarea";
+import { useToast } from "../ui/use-toast";
 
 const formSchema = z.object({
   title: z

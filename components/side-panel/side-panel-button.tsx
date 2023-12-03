@@ -1,9 +1,10 @@
 "use client";
 
 import { Edit, Trash } from "lucide-react";
-import { Button } from "../ui/button";
-import { toast } from "../ui/use-toast";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { refresh, setRefresh } from "../providers/session-provider";
+import CategoryNew from "../task/category-new";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,9 +16,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
-import { refresh, setRefresh } from "../session-provider";
-import { useState } from "react";
-import CategoryNew from "../category-new";
+import { Button } from "../ui/button";
+import { toast } from "../ui/use-toast";
 
 export default function SidePanelButton({
   current,

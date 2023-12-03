@@ -1,9 +1,9 @@
 "use client";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import EmblaCarousel, { api } from "../embla-carousel";
 import { EmblaOptionsType } from "embla-carousel-react";
-import { usePrevNextButtons } from "../embla-carousel-arrow-buttons";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import EmblaCarousel, { api } from "../misc/embla-carousel";
+import { usePrevNextButtons } from "../misc/embla-carousel-arrow-buttons";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 const OPTIONS: EmblaOptionsType = {
   loop: true,
