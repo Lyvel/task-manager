@@ -1,16 +1,22 @@
 "use client";
-import { LogOut } from "lucide-react";
+import { LogOut, Settings } from "lucide-react";
 import SidePanelButton from "./side-panel-button";
 import { signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 export default function SidePanelSignout() {
-  const router = useRouter();
   return (
-    <div className="flex w-full mb-10">
+    <div className="flex flex-col w-full mb-10">
       <SidePanelButton
         current={false}
-        title={"Sign Out"}
+        title={"Settings"}
+        icon={<Settings />}
+        onClick={() => {
+          console.log("Settings");
+        }}
+      />
+      <SidePanelButton
+        current={false}
+        title={"Log Out"}
         icon={<LogOut />}
         onClick={() => {
           signOut({ callbackUrl: "/" });

@@ -10,16 +10,16 @@ import {
   Plus,
   Square,
 } from "lucide-react";
-import SidePanelButton from "./side-panel-button";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
+import { categories } from "../providers/session-provider";
+import CategoryNew from "../task/category-new";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "../ui/collapsible";
-import { useState } from "react";
-import CategoryNew from "../category-new";
-import { categories } from "../session";
+import SidePanelButton from "./side-panel-button";
 
 export default function SidePanelNavigation() {
   const router = useRouter();
@@ -29,9 +29,12 @@ export default function SidePanelNavigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [showNewCat, setShowNewCat] = useState(false);
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full pt-6">
       <SidePanelButton
-        current={tasks === "all" || tasks === null}
+        current={
+          tasks === "all" ||
+          (tasks === null && searchParams.get("settings") === null)
+        }
         title={"All Tasks"}
         icon={<Home />}
         onClick={() => router.push("/?tasks=all")}
@@ -80,16 +83,10 @@ export default function SidePanelNavigation() {
                   key={cat.id}
                   current={category === cat.id.toString()}
                   title={cat.title}
-                  icon={<Folder />}
+                  icon={<Folder color={cat.colour} />}
                   onClick={() =>
-                    router.push(
-                      "/?tasks=all-cat&category=" +
-                        cat.id +
-                        "&categoryName=" +
-                        cat.title
-                    )
+                    router.push("/?tasks=all-cat&category=" + cat.id)
                   }
-                  className={"translate-x-5"}
                   category={cat}
                 />
               ))}
@@ -97,9 +94,9 @@ export default function SidePanelNavigation() {
           )}
           <SidePanelButton
             current={false}
-            title={"New Category"}
+            title={"Add New Category"}
             icon={<Plus />}
-            className={"translate-x-5"}
+            className="pl-6 hover:bg-muted text-sm"
             onClick={() => setShowNewCat(true)}
           />
         </CollapsibleContent>

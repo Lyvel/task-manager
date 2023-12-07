@@ -1,15 +1,17 @@
 "use client";
-import { CalendarIcon, Plus, X } from "lucide-react";
-import { Button } from "./ui/button";
-import { Checkbox } from "./ui/checkbox";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
-import { Textarea } from "./ui/textarea";
-import { FormEvent, useState } from "react";
-import { refresh, session, setRefresh } from "./session";
-import * as z from "zod";
-import { useForm } from "react-hook-form";
+import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
+import { CalendarIcon, Plus, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { FormEvent, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { ColourPicker } from "../misc/colour-picker";
+import { refresh, session, setRefresh } from "../providers/session-provider";
+import { Button } from "../ui/button";
+import { Calendar } from "../ui/calendar";
+import { Checkbox } from "../ui/checkbox";
 import {
   Form,
   FormControl,
@@ -17,13 +19,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./ui/form";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { Calendar } from "./ui/calendar";
-import { format } from "date-fns";
-import { cn } from "@/lib/utils";
-import { useToast } from "./ui/use-toast";
-import { useRouter } from "next/navigation";
+} from "../ui/form";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Textarea } from "../ui/textarea";
+import { useToast } from "../ui/use-toast";
 
 const formSchema = z.object({
   title: z
@@ -31,6 +32,7 @@ const formSchema = z.object({
     .min(1, { message: "Title must be at least 1 character." })
     .max(100, { message: "Title must be at within 100 characters." }),
   description: z.string(),
+  colour: z.string(),
 });
 
 export default function CategoryNew({
@@ -42,6 +44,7 @@ export default function CategoryNew({
   newCategory?: boolean | undefined;
   category?: Category | undefined;
 }) {
+  const [background, setBackground] = useState("#ffffff");
   const { toast } = useToast();
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -49,8 +52,13 @@ export default function CategoryNew({
     defaultValues: {
       title: category ? category.title : "",
       description: category ? category.description : "",
+      colour: category ? category.colour : "#ffffff",
     },
   });
+  useEffect(() => {
+    form.setValue("colour", background);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [background]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (newCategory) {
@@ -61,6 +69,7 @@ export default function CategoryNew({
           email: session?.user.email,
           title: values.title,
           description: values.description,
+          colour: values.colour,
         }),
       });
       if (response.ok) {
@@ -86,6 +95,7 @@ export default function CategoryNew({
           id: category?.id,
           title: values.title,
           description: values.description,
+          colour: values.colour,
         }),
       });
       if (response.ok) {
@@ -147,6 +157,26 @@ export default function CategoryNew({
                       className="max-h-[32rem]"
                       {...field}
                     />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="colour"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Folder Colour</FormLabel>
+                  <FormControl>
+                    <div className="flex flex-col">
+                      <Input className="hidden" {...field} value={background} />
+                      <ColourPicker
+                        className="w-full"
+                        background={background}
+                        setBackground={setBackground}
+                      />
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>

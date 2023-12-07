@@ -35,6 +35,7 @@ type SP = {
   tasks: string;
   category: string;
   categoryName: string;
+  settings: string;
 };
 
 type Category = {
@@ -42,6 +43,7 @@ type Category = {
   email: string;
   title: string;
   description: string;
+  colour: string;
   createdAt: Date;
   updatedAt: Date;
 };
