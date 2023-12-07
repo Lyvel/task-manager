@@ -87,7 +87,7 @@ export default function TaskCard({ task }: { task: Task }) {
   return (
     <>
       <div
-        className={`p-5 bg-background rounded-lg flex flex-col justify-between gap-4 m-1 2xl:max-w-xs w-full hover:bg-muted cursor-pointer border border-indigo-950 hover:dark:border-indigo-50 border-opacity-10`}
+        className={`p-5 bg-background rounded-lg flex flex-col justify-between gap-4 m-1 w-full hover:bg-muted cursor-pointer border border-indigo-950 hover:dark:border-indigo-50 border-opacity-10`}
         style={{
           outlineColor: categories.find((c) => c.id === task.category)?.colour,
         }}
@@ -121,7 +121,7 @@ export default function TaskCard({ task }: { task: Task }) {
             <h1 className="text-xl font-bold tracking-wider  overflow-hidden text-ellipsis whitespace-nowrap">
               {task.title}
             </h1>
-            <p className="line-clamp-3 text-ellipsis text-indigo-950 dark:text-indigo-50 tracking-tight opacity-60">
+            <p className="line-clamp-3 text-ellipsis text-indigo-950 dark:text-slate-400 tracking-tight ">
               {task.description}
             </p>
           </div>
@@ -140,7 +140,7 @@ export default function TaskCard({ task }: { task: Task }) {
             </p>
           )}
           <div className="flex justify-between items-center">
-            <time className="line-clamp-3 text-ellipsis text-indigo-950 dark:text-indigo-50 tracking-tight opacity-60">
+            <time className="line-clamp-3 text-ellipsis text-indigo-950 dark:text-slate-400 tracking-tight ">
               {new Date(task.completeBy).toLocaleDateString()}
             </time>
             <AlertDialog>
@@ -148,7 +148,7 @@ export default function TaskCard({ task }: { task: Task }) {
                 <Button
                   variant={"ghost"}
                   size={"icon"}
-                  className="hover:text-destructive dark:hover:text-destructive text-indigo-950 dark:text-indigo-50 opacity-60"
+                  className="hover:text-destructive dark:hover:text-destructive text-indigo-950 dark:text-slate-400"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <Trash />
